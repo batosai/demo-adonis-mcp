@@ -1,0 +1,85 @@
+@jrmc.card({ class: 'bg-base-100 shadow-xl mx-4 mt-4 z-20 sticky top-5 left-0' })
+  @slot('top')
+    <ul class="flex items-center w-full m-2 space-x-3 flew-row">
+      <li class="avatar online">
+        <div class="w-12 h-12 mask mask-squircle">
+          @if (auth.user.avatar)
+            <img src="{{ await auth.user.avatar.getUrl('thumbnail') }}" loading="lazy" alt="" />
+          @end
+        </div>
+      </li>
+      <li class="basis-1/2">
+        <div class="font-bold">
+          <a href="{{ route('admin.users.edit', auth.user) }}" @click="open = false">{{ auth.user.firstname }}</a>
+        </div>
+        <div class="text-sm opacity-50">
+          <a href="{{ route('admin.users.edit', auth.user) }}" @click="open = false">{{ auth.user.lastname }}</a>
+        </div>
+      </li>
+      <li >
+        @if(session.has('originalUserId'))
+          @jrmc.form({ action: route('impersonate.destroy', { qs: { _method: 'DELETE' }}), error: false })
+            @jrmc.button({ class: 'w-full btn-ghost justify-center', type: 'submit' })
+              @!svg('tabler:logout', { width: 20, height: 20 })
+            @end
+          @end
+        @else
+          @jrmc.form({ action: route('auth.session.destroy'), error: false })
+            @jrmc.button({ class: 'w-full btn-ghost justify-center', type: 'submit' })
+              @!svg('tabler:logout', { width: 20, height: 20 })
+            @end
+          @end
+        @end
+      </li>
+    </ul>
+  @end
+@end
+
+<nav class="overflow-y-scroll" style="max-height: calc(100% - 125px );">
+  <ul class="w-full p-4 menu menu-compact text-base-content rounded-box">
+
+    <li>
+      @!admin.sidebar.link({
+        'up-alias': '/admin/dashboard/*',
+        text: t('admin.sidebar.dashboard'),
+        href: route('admin.dashboard'),
+        icon: 'tabler:dashboard',
+      })
+    </li>
+
+    <li>
+      <li>
+        @!admin.sidebar.link({
+          'up-alias': '/admin/users/*',
+          text: t('admin.sidebar.users'),
+          href: route('admin.users.index'),
+          icon: 'tabler:users',
+        })
+      </li>
+    </li>
+
+    <li></li>
+
+    <li>
+      <details {{ html.classNames([ { 'open' : request.matchesRoute(['admin.audits.index', 'admin.audits.show']) }]) }}>
+        <summary>
+          @!svg('tabler:settings')
+          {{ t('admin.sidebar.system') }}
+        </summary>
+        <ul>
+          <li>
+            @!admin.sidebar.link({
+              'up-alias': '/admin/audits/*',
+              text: t('admin.sidebar.audits'),
+              href: route('admin.audits.index')
+            })
+          </li>
+        </ul>
+      </details>
+    </li>
+
+  </ul>
+</nav>
+
+@!admin.bottomNavigation({ class: 'hidden lg:flex' })
+
