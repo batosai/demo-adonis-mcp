@@ -66,6 +66,7 @@
     "@iconify-json/tabler": "^1.2.23",
     "@jrmc/adonis-attachment": "^5.0.2",
     "@jrmc/adonis-lucid-commands": "^1.0.0",
+    "@jrmc/adonis-mcp": "^1.0.0-alpha.13",
     "@jrmc/adonis-unpoly": "^1.2.0",
     "@jrmc/edge-components": "^3.0.0",
     "@stouder-io/adonis-auditing": "^1.1.8",

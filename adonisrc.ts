@@ -16,7 +16,8 @@ export default defineConfig({
     () => import('@adonisjs/mail/commands'),
     () => import('@adonisjs/bouncer/commands'),
     () => import('adonis-lucid-filter/commands'),
-    () => import('@jrmc/adonis-lucid-commands/commands')
+    () => import('@jrmc/adonis-lucid-commands/commands'),
+    () => import('@jrmc/adonis-mcp/commands')
   ],
 
   /*
@@ -52,6 +53,7 @@ export default defineConfig({
     () => import('@stouder-io/adonis-auditing/auditing_provider'),
     () => import('@jrmc/adonis-attachment/attachment_provider'),
     () => import('@adonisjs/drive/drive_provider'),
+    () => import('@jrmc/adonis-mcp/mcp_provider')
   ],
 
   /*
@@ -131,6 +133,7 @@ export default defineConfig({
 
   directories: {
     audit_resolvers: 'src/core/app/audit_resolvers',
+    mcp: 'src/mcp',
   },
 
   assetsBundler: false,
