@@ -133,7 +133,7 @@ export default defineConfig({
 
   directories: {
     audit_resolvers: 'src/core/app/audit_resolvers',
-    mcp: 'src/mcp',
+    mcp: 'src/mcp/app',
   },
 
   assetsBundler: false,
