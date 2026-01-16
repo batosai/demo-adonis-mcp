@@ -53,7 +53,8 @@ export default defineConfig({
     () => import('@stouder-io/adonis-auditing/auditing_provider'),
     () => import('@jrmc/adonis-attachment/attachment_provider'),
     () => import('@adonisjs/drive/drive_provider'),
-    () => import('@jrmc/adonis-mcp/mcp_provider')
+    () => import('@jrmc/adonis-mcp/mcp_provider'),
+    () => import('@adonisjs/cors/cors_provider')
   ],
 
   /*
@@ -81,6 +82,9 @@ export default defineConfig({
     // admin
     () => import('./src/admin/start/routes.js'),
     () => import('./src/admin/start/view.js'),
+
+    // mcp
+    () => import('./src/mcp/start/routes.js'),
   ],
 
   /*

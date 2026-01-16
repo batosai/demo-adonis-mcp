@@ -25,6 +25,7 @@ server.use([
   () => import('#core/middleware/container_bindings_middleware'),
   () => import('@adonisjs/static/static_middleware'),
   () => import('@adonisjs/vite/vite_middleware'),
+  () => import('@adonisjs/cors/cors_middleware')
 ])
 
 /**
@@ -39,6 +40,8 @@ router.use([
   () => import('#core/middleware/detect_user_locale_middleware'),
   () => import('#core/middleware/initialize_bouncer_middleware'),
   () => import('@jrmc/adonis-unpoly/unpoly_middleware'),
+  () => import('#mcp/middleware/mcp_middleware'),
+  () => import('#mcp/middleware/log_mcp_traffic_middleware')
 ])
 
 /**
@@ -48,5 +51,4 @@ router.use([
 export const middleware = router.named({
   guest: () => import('#auth/middleware/guest_middleware'),
   auth: () => import('#auth/middleware/auth_middleware'),
-  mcp: () => import('#mcp/middleware/mcp_middleware'),
 })

@@ -1,17 +1,21 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 
-import { policies } from '#core/policies/main'
-import * as abilities from '#core/abilities/main'
-import { Bouncer } from '@adonisjs/bouncer'
+// import { policies } from '#core/policies/main'
+// import * as abilities from '#core/abilities/main'
+// import { Bouncer } from '@adonisjs/bouncer'
 
 export default class McpMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
     const body = ctx.request.body()
     const method = body.method
 
-    const contentType = ctx.request.header('Content-Type')
-    if (!contentType || !['application/json', 'text/event-stream'].includes(contentType)) {
+    if (ctx.request.url() !== '/mcp') {
+      return next()
+    }
+
+    const contentType = ctx.request.header('Content-Type') || ''
+    if (!contentType.includes('application/json') && !contentType.includes('text/event-stream')) {
       return ctx.response.badRequest('Content-Type header must be application/json')
     }
 
@@ -31,15 +35,15 @@ export default class McpMiddleware {
   }
 }
 
-declare module '@jrmc/adonis-mcp/types/context' {
-  export interface McpContext {
-    auth?: {
-      user?: HttpContext['auth']['user']
-    }
-    bouncer?: Bouncer<
-      Exclude<HttpContext['auth']['user'], undefined>,
-      typeof abilities,
-      typeof policies
-    >
-  }
-}
+// declare module '@jrmc/adonis-mcp/types/context' {
+//   export interface McpContext {
+//     auth?: {
+//       user?: HttpContext['auth']['user']
+//     }
+//     bouncer?: Bouncer<
+//       Exclude<HttpContext['auth']['user'], undefined>,
+//       typeof abilities,
+//       typeof policies
+//     >
+//   }
+// }
