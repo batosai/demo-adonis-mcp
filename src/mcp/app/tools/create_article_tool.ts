@@ -22,9 +22,8 @@ export default class CreateArticleTool extends Tool<Schema> {
     try {
       const payload = await ArticleValidator.validate(args)
 
-      await Article.create(payload)
-      console.log(args.text)
-      return response.text('Hello, world!')
+      const article = await Article.create(payload)
+      return response.text(`Article "${article.title}" created successfully with id: ${article.id}`)
     } catch (error) {
       return response.error('Error: ' + error.message)
     }

@@ -6,8 +6,8 @@ export const MAX_SIZE = '10mb'
 
 export const ArticleValidator = vine.compile(
   vine.object({
-    title: vine.string().trim().toCamelCase().minLength(MIN_LENGTH).maxLength(MAX_LENGTH),
-    content: vine.string().trim().toCamelCase().minLength(MIN_LENGTH).maxLength(MAX_LENGTH),
+    title: vine.string().trim().minLength(MIN_LENGTH),
+    content: vine.string().trim(),
     // image: vine
     //   .file({
     //     size: '2mb',
